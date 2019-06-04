@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     this.genderCats = [];
     if (peoples) {
       peoples.forEach(people => {
-        const cats = people.pets.filter(pet => pet.type == PetType.Cat);
+        const cats = people && people.pets ? people.pets.filter(pet => pet.type == PetType.Cat) : [];
         const existingGender = this.genderCats.find(x => x.gender == people.gender);
         if (existingGender) {
           existingGender.pets = cats.reduce((coll, item) => {
