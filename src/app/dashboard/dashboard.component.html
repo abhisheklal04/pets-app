@@ -16,7 +16,13 @@
       <tbody *ngIf="genderCats">
       <tr *ngFor="let item of genderCats; let index = index; ">
         <td>{{item.gender}}</td>
-        <td>{{item.pets}}</td>
+        <td>
+          <ul>
+            <li *ngFor="let cat of genderCats.pets; let index = index; ">
+              {{cat}}
+            </li>
+          </ul>
+        </td>
       </tr>
       </tbody>
     </table>

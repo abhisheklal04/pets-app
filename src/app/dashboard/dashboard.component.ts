@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PetsService} from '../_services';
-import {People} from '../_models';
+import {People, PetsByGender, PetType} from '../_models';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,9 +9,7 @@ import {People} from '../_models';
 })
 export class DashboardComponent implements OnInit {
 
-  peoples: Array<People>;
-
-  genderCats: Array<{ gender: string, pets: Array<string> }>;
+  genderCats: Array<PetsByGender>;
 
   constructor(private petsService: PetsService) {
     this.genderCats = [
@@ -20,7 +18,7 @@ export class DashboardComponent implements OnInit {
         pets: ['molly', 'tom'],
       },
       {
-        gender: 'FeMale',
+        gender: 'Female',
         pets: ['Tammy', 'Zelda'],
       }
     ];
@@ -47,12 +45,28 @@ export class DashboardComponent implements OnInit {
     this.genderCats = null;
     this.petsService.getPetsData()
       .subscribe((peoples: Array<People>) => {
-        this.peoples = peoples;
-        this.genderCats = this.sampleData();
+        this.populateGenderCats(peoples);
       });
   }
 
-  populateGenderCats() {
-
+  populateGenderCats(peoples: Array<People>) {
+    this.genderCats = [];
+    if (peoples) {
+      peoples.forEach(people => {
+        const cats = people.pets.filter(pet => pet.type == PetType.Cat);
+        const existingGender = this.genderCats.find(x => x.gender == people.gender);
+        if (existingGender) {
+          existingGender.pets = cats.reduce((coll, item) => {
+            coll.push(item as any);
+            return coll;
+          }, existingGender.pets);
+        } else {
+          this.genderCats.push({
+            pets: cats,
+            gender: people.gender
+          } as any);
+        }
+      });
+    }
   }
 }
