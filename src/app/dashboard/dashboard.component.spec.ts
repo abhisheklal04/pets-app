@@ -2,7 +2,7 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 import {RouterTestingModule} from '@angular/router/testing';
 import {DashboardComponent} from './dashboard.component';
 import {CommonService, PetsService} from '../_services';
-import {SpyHelperSpec} from '../helpers/spy-helper.spec';
+import {SpyHelper} from '../helpers/spy-helper.spec';
 import {of} from 'rxjs';
 
 describe('DashboardComponent', () => {
@@ -21,7 +21,7 @@ describe('DashboardComponent', () => {
         DashboardComponent,
       ],
       providers: [
-        SpyHelperSpec.provideMagicalMock(PetsService),
+        SpyHelper.provideMagicalMock(PetsService),
         CommonService,
       ],
       imports: [RouterTestingModule]
