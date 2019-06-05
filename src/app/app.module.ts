@@ -21,6 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   ],
   providers: [
     Services.PetsService,
+    Services.CommonService
   ],
   bootstrap: [AppComponent]
 })

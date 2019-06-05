@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PetsService} from '../_services';
+import {CommonService, PetsService} from '../_services';
 import {People, PetsByGender, PetType} from '../_models';
 
 @Component({
@@ -9,31 +9,17 @@ import {People, PetsByGender, PetType} from '../_models';
 })
 export class DashboardComponent implements OnInit {
 
-  genderCats: Array<PetsByGender>;
+  petsByGender: Array<PetsByGender>;
 
-  constructor(private petsService: PetsService) {
-    this.genderCats = [
-      {
-        gender: 'Male',
-        pets: ['molly', 'tom'],
-      },
-      {
-        gender: 'Female',
-        pets: ['Tammy', 'Zelda'],
-      }
-    ];
+  constructor(private petsService: PetsService,
+              private commonService: CommonService,
+  ) {
   }
 
-  sampleData() {
+  getSampleData() {
     return [
-      {
-        gender: 'Male',
-        pets: ['molly', 'tom'],
-      },
-      {
-        gender: 'FeMale',
-        pets: ['Tammy', 'Zelda'],
-      }
+      {'name': 'Bob', 'gender': 'Male', 'age': 23, 'pets': [{'name': 'Garfield', 'type': 'Cat'}, {'name': 'Fido', 'type': 'Dog'}]},
+      {'name': 'Bob2', 'gender': 'Male', 'age': 23, 'pets': [{'name': 'garfield', 'type': 'Cat'}, {'name': 'fido', 'type': 'Dog'}]}
     ];
   }
 
@@ -42,31 +28,42 @@ export class DashboardComponent implements OnInit {
   }
 
   getPetsData() {
-    this.genderCats = null;
     this.petsService.getPetsData()
       .subscribe((peoples: Array<People>) => {
-        this.populateGenderCats(peoples);
+        this.populatePetsByGender(peoples);
       });
+    // this.populatePetsByGender(this.getSampleData());
   }
 
-  populateGenderCats(peoples: Array<People>) {
-    this.genderCats = [];
+  populatePetsByGender(peoples: Array<People>) {
+    this.petsByGender = [];
     if (peoples) {
       peoples.forEach(people => {
         const cats = people && people.pets ? people.pets.filter(pet => pet.type == PetType.Cat) : [];
-        const existingGender = this.genderCats.find(x => x.gender == people.gender);
+        const existingGender = this.petsByGender
+          .find(x => this.commonService.compareStringsCaseInSensitive(x.gender, people.gender) === 0);
         if (existingGender) {
-          existingGender.pets = cats.reduce((coll, item) => {
-            coll.push(item as any);
+          existingGender.pets = cats.map(cat => cat.name).reduce((coll, item) => {
+            coll.push(item);
             return coll;
           }, existingGender.pets);
         } else {
-          this.genderCats.push({
-            pets: cats,
+          this.petsByGender.push({
+            pets: cats.map(cat => cat.name),
             gender: people.gender
-          } as any);
+          });
         }
       });
     }
+
+    this.sortPetsByNameForAllGenders();
+  }
+
+  sortPetsByNameForAllGenders() {
+    this.petsByGender.forEach(gender => {
+      if (gender.pets) {
+        this.commonService.stringArraySortCaseInSensitive(gender.pets);
+      }
+    });
   }
 }
