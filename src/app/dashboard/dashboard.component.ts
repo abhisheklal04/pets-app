@@ -20,8 +20,8 @@ export class DashboardComponent implements OnInit {
 
   getSampleData() {
     return [
-      {'name': 'Bob', 'gender': 'Male', 'age': 23, 'pets': [{'name': 'Garfield', 'type': 'Cat'}, {'name': 'Fido', 'type': 'Dog'}]},
-      {'name': 'Bob2', 'gender': 'Male', age: 23, 'pets': [{'name': 'garfield', 'type': 'Cat'}, {'name': 'fido', 'type': 'Dog'}]}
+      {name: 'Bob', gender: 'Male', age: 23, pets: [{name: 'Garfield', type: 'Cat'}, {name: 'Fido', type: 'Dog'}]},
+      {name: 'Bob2', gender: 'Male', age: 23, pets: [{name: 'garfield', type: 'Cat'}, {name: 'fido', type: 'Dog'}]}
     ];
   }
 
