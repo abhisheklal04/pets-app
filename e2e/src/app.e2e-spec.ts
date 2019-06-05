@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import {browser, element, by, logging} from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -10,7 +10,12 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to pets-reporting-app!');
+    expect(page.getTitleText()).toEqual('Pets App');
+  });
+
+  it('should display cats grouped data', () => {
+    page.navigateTo();
+    expect(element(by.css('table tbody'))).toBeTruthy('grouped cats are not rendered');
   });
 
   afterEach(async () => {

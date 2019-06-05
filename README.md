@@ -1,14 +1,14 @@
-# PetsReportingApp
+# Pets App
+This app scaffolds an angular app consumes a json file defined in the asset folder. containing people and their pets data.
+The apps home page displays cat names grouped by their owners gender.
+This app demonstrates a basic angular structural design including services, unit testing of all components, router definition.
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
