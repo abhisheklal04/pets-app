@@ -18,27 +18,19 @@ export class DashboardComponent implements OnInit {
     this.title = 'Pets App';
   }
 
-  getSampleData() {
-    return [
-      {name: 'Bob', gender: 'Male', age: 23, pets: [{name: 'Garfield', type: 'Cat'}, {name: 'Fido', type: 'Dog'}]},
-      {name: 'Bob2', gender: 'Male', age: 23, pets: [{name: 'garfield', type: 'Cat'}, {name: 'fido', type: 'Dog'}]}
-    ];
-  }
-
   ngOnInit() {
     this.getPetsData();
   }
 
   getPetsData() {
+    this.petsByGender = [];
     this.petsService.getPetsData()
       .subscribe((peoples: Array<People>) => {
         this.populatePetsByGender(peoples);
       });
-    // this.populatePetsByGender(this.getSampleData());
   }
 
   populatePetsByGender(peoples: Array<People>) {
-    this.petsByGender = [];
     if (peoples) {
       peoples.forEach(people => {
         const cats = people && people.pets ? people.pets.filter(pet => pet.type == PetType.Cat) : [];

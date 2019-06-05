@@ -26,6 +26,7 @@
       </tr>
       </tbody>
     </table>
+    <div *ngIf="!petsByGender || petsByGender.length == 0" class="lds-ring"><div></div><div></div><div></div><div></div></div>
   </div>
   <router-outlet></router-outlet>
 </div>

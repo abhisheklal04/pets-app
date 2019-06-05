@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {DashboardComponent} from './dashboard.component';
 import {CommonService, PetsService} from '../_services';
@@ -108,7 +108,6 @@ describe('DashboardComponent', () => {
   });
 
   it('should take cats and sort them by name with case insensitivity comparison', () => {
-
     const stubPeopleArray = of([
       {name: 'Bob3', gender: 'male', age: 23, pets: [{name: 'tammy', type: 'Cat'}, {name: 'fido', type: 'Dog'}]},
       {name: 'Bob4', gender: 'male', age: 23, pets: [{name: 'TAMMY', type: 'Cat'}, {name: 'fido', type: 'Dog'}]},
