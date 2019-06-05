@@ -2,7 +2,7 @@ import {Provider, Type} from '@angular/core';
 
 export type Mock<T> = T & { [P in keyof T]: T[P] & jasmine.Spy };
 
-export class SpyHelper {
+export class SpyHelperSpec {
 
   public static createMagicalMock<T>(type: Type<T>): Mock<T> {
     const target: any = {};
@@ -31,7 +31,7 @@ export class SpyHelper {
   public static provideMagicalMock<T>(type: Type<T>): Provider {
     return {
       provide: type,
-      useFactory: () => SpyHelper.createMagicalMock(type),
+      useFactory: () => SpyHelperSpec.createMagicalMock(type),
     };
   }
 }
