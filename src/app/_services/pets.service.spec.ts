@@ -28,6 +28,14 @@ describe('PetsService', () => {
     expect(petsService).toBeTruthy();
   });
 
+  it('#getPetsData1 should return any stubbed value from a httpClient service', () => {
+
+    const stubValue = of({});
+    petsService = new PetsService(httpClientSpy);
+    petsService.getPetsData();
+    // expect(petsService.getPetsData()).toBe(stubValue, 'service returned stub value');
+  });
+
   it('#getPetsData should return any stubbed value from a httpClient service', () => {
 
     const stubValue = of({});

@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 
 describe('AuthGuardService', () => {
   let authGuardService: AuthGuardService;
-  let routerSpy: jasmine.SpyObj<Router>;
+  // let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -16,7 +16,7 @@ describe('AuthGuardService', () => {
 
     // Inject both the service-to-test and its (spy) dependency
     authGuardService = TestBed.get(AuthGuardService);
-    routerSpy = TestBed.get(Router);
+    // routerSpy = TestBed.get(Router);
   });
 
   it('should be created', () => {
