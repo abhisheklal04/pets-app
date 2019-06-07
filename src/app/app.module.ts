@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
-import * as Services from './_services/index';
+import * as Services from './services/index';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
@@ -20,7 +20,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
   ],
   providers: [
-    Services.PetsService,
+    Services.OwnersService,
     Services.CommonService
   ],
   bootstrap: [AppComponent]

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  dataUrl: 'assets/data/people.json'
+  ownersAndPetsListUrl: 'assets/data/people.json'
 };
 
 /*

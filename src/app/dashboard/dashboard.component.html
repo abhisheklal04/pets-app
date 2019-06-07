@@ -13,8 +13,8 @@
         <th scope="col">Cats</th>
       </tr>
       </thead>
-      <tbody *ngIf="petsByGender">
-      <tr *ngFor="let item of petsByGender; let index = index; ">
+      <tbody *ngIf="petNamesGroupedByOwnersGender">
+      <tr *ngFor="let item of petNamesGroupedByOwnersGender; let index = index; ">
         <td>{{item.gender}}</td>
         <td>
           <ul>
@@ -26,7 +26,7 @@
       </tr>
       </tbody>
     </table>
-    <div *ngIf="!petsByGender || petsByGender.length == 0" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    <div *ngIf="!petNamesGroupedByOwnersGender || petNamesGroupedByOwnersGender.length == 0" class="lds-ring"><div></div><div></div><div></div><div></div></div>
   </div>
   <router-outlet></router-outlet>
 </div>

@@ -1,2 +1,2 @@
-export * from './pets.service';
+export * from './owners.service';
 export * from './common.service';

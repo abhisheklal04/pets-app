@@ -1,6 +1,6 @@
-import {Pet} from './Pet';
+import {Pet} from './pet';
 
-export interface People {
+export interface Owner {
   name: string;
   gender: string;
   age: number;

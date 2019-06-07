@@ -1,11 +1,11 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpClient} from '@angular/common/http';
-import {PetsService} from './pets.service';
+import {OwnersService} from './owners.service';
 import {of} from 'rxjs';
 
-describe('PetsService', () => {
+describe('OwnersService', () => {
 
-  let petsService: PetsService;
+  let petsService: OwnersService;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
@@ -13,39 +13,39 @@ describe('PetsService', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        PetsService,
+        OwnersService,
         {provide: HttpClient, useValue: spy}
       ]
     });
 
     // Inject both the service-to-test and its (spy) dependency
-    petsService = TestBed.get(PetsService);
+    petsService = TestBed.get(OwnersService);
     httpClientSpy = TestBed.get(HttpClient);
   });
 
   it('should be created', () => {
-    petsService = new PetsService(httpClientSpy);
+    petsService = new OwnersService(httpClientSpy);
     expect(petsService).toBeTruthy();
   });
 
   it('#getPetsData1 should return any stubbed value from a httpClient service', () => {
 
     const stubValue = of({});
-    petsService = new PetsService(httpClientSpy);
-    petsService.getPetsData();
-    // expect(petsService.getPetsData()).toBe(stubValue, 'service returned stub value');
+    petsService = new OwnersService(httpClientSpy);
+    petsService.getOwnersWithPets();
+    // expect(petsService.getOwnersWithPets()).toBe(stubValue, 'service returned stub value');
   });
 
-  it('#getPetsData should return any stubbed value from a httpClient service', () => {
+  it('#getOwnersWithPets should return any stubbed value from a httpClient service', () => {
 
     const stubValue = of({});
     httpClientSpy.get.and.returnValue(stubValue);
 
-    petsService = new PetsService(httpClientSpy);
-    expect(petsService.getPetsData()).toBe(stubValue, 'service returned stub value');
+    petsService = new OwnersService(httpClientSpy);
+    expect(petsService.getOwnersWithPets()).toBe(stubValue, 'service returned stub value');
   });
 
-  it('#getPetsData should return an observable value from a httpClient service', () => {
+  it('#getOwnersWithPets should return an observable value from a httpClient service', () => {
 
     const stubValue = of([
       {name: 'Bob', gender: 'Male', age: 23, pets: [{name: 'Garfield', type: 'Cat'}, {name: 'Fido', type: 'Dog'}]},
@@ -54,9 +54,9 @@ describe('PetsService', () => {
 
     httpClientSpy.get.and.returnValue(stubValue);
 
-    petsService = new PetsService(httpClientSpy);
-    expect(petsService.getPetsData()).actual.subscribe(result => {
-      expect(result[0].name).toBe('Bob', 'getPetsData returned observable value');
+    petsService = new OwnersService(httpClientSpy);
+    expect(petsService.getOwnersWithPets()).actual.subscribe(result => {
+      expect(result[0].name).toBe('Bob', 'getOwnersWithPets returned observable value');
     });
   });
 });

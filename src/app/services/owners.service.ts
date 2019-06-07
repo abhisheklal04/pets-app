@@ -1,37 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {CommonService, OwnersService} from '../services';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
+import {Observable} from 'rxjs';
 import {Owner, PetsGroupedByOwnersGender, PetType} from '../shared/models';
+import {map} from 'rxjs/operators';
 
-@Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+@Injectable({
+  providedIn: 'root'
 })
-export class DashboardComponent implements OnInit {
+export class OwnersService {
 
-  title: string;
+  ownersAndTheirPetsListUrl: string;
 
-  public petNamesGroupedByOwnersGender: Array<PetsGroupedByOwnersGender>;
-
-  constructor(private ownersService: OwnersService,
-              private commonService: CommonService,
-  ) {
-    this.title = 'Pets App';
+  constructor(private http: HttpClient) {
+    this.ownersAndTheirPetsListUrl = environment.ownersAndPetsListUrl;
   }
 
-  ngOnInit() {
-    this.populatePetNamesOfGivenTypeGroupedByOwnersGender();
+  getOwnersWithPets(): Observable<any> {
+    return this.http.get(this.ownersAndTheirPetsListUrl);
   }
 
-  populatePetNamesOfGivenTypeGroupedByOwnersGender() {
-    this.petNamesGroupedByOwnersGender = [];
-    this.ownersService.getOwnersWithPets()
-      .subscribe((ownersWithPets: Array<Owner>) => {
-        this.groupPetsOfGivenTypeWithOwnersGender(ownersWithPets, PetType.Cat);
-      });
-  }
-
-  groupPetsOfGivenTypeWithOwnersGender(ownersWithPets: Array<Owner>, petType: PetType) {
+  /*groupPetsOfGivenTypeWithOwnersGender(ownersWithPets: Array<Owner>, petType: PetType) {
     const petListGroupedByOwnersGender: Array<PetsGroupedByOwnersGender> = [];
     if (ownersWithPets) {
       ownersWithPets.forEach(owner => {
@@ -52,11 +41,9 @@ export class DashboardComponent implements OnInit {
           }
         }
       });
+      return petListGroupedByOwnersGender;
     }
-
     this.sortPetsForAllGenders(petListGroupedByOwnersGender);
-
-    this.petNamesGroupedByOwnersGender = petListGroupedByOwnersGender;
   }
 
   sortPetsForAllGenders(petListGroupedByOwnersGender): void {
@@ -65,5 +52,5 @@ export class DashboardComponent implements OnInit {
         this.commonService.stringArraySortCaseInSensitive(gender.pets);
       }
     });
-  }
+  }*/
 }
